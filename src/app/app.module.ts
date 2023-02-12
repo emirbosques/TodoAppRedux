@@ -7,6 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { StoreModule } from '@ngrx/store';
 import { toDoReducer } from './todos/todo.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
   imports: [
     BrowserModule,
     TodoModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({todos: toDoReducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
