@@ -1,6 +1,6 @@
-import { Action, createReducer, on, State } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 import { Todo } from './models/todo.model';
-import { crearToDo, deleteTodo, editTodo, toggleTodo } from './todo.actions';
+import * as actions from './todo.actions';
 
 
 export const initialStateToDo: Todo[] = [
@@ -14,11 +14,16 @@ export const initialStateToDo: Todo[] = [
 
 const _toDoReducer = createReducer(
     initialStateToDo,
-    on(crearToDo, (state, { texto }) => [...state, new Todo(texto)]),
-    on(deleteTodo, (state, { id }) => 
+    // CREATE
+    on(actions.crearToDo, (state, { texto }) => [...state, new Todo(texto)]),
+    
+    // DELETE
+    on(actions.deleteTodo, (state, { id }) => 
         state.filter(todo => todo.id !== id)
     ),
-    on(toggleTodo, (state, { id }) => {
+
+    // COMPLETE ONE TODO BY ID
+    on(actions.toggleTodo, (state, { id }) => {
         return state.map(todo => {
             if (todo.id === id) {
                 return {
@@ -30,7 +35,23 @@ const _toDoReducer = createReducer(
             }
         })
     }),
-    on(editTodo, (state, { id, texto }) => {
+
+    // COMPLETE ALL TODOs
+    on(actions.toggleAllTodos, (state, { completado }) => {
+        return state.map(todo => {
+            if (state.length > 0) {
+                return {
+                    ...todo,
+                    completado
+                }
+            } else {
+                return todo;
+            }
+        })
+    }),
+
+    // EDIT TODO
+    on(actions.editTodo, (state, { id, texto }) => {
         return state.map(todo => {
             if (todo.id === id) {
                 return {

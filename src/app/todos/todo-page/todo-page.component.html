@@ -4,7 +4,12 @@
     <app-todo-add></app-todo-add>
     <!-- This section should be hidden by default and shown when there are todos -->
     <section class="main">
-        <input id="toggle-all" class="toggle-all" type="checkbox">
+        
+        <!-- CHECK COMPLETE ALL -->
+        <input
+        (click)="completeAllTodos()"
+        id="toggle-all" class="toggle-all" type="checkbox">
+
         <label for="toggle-all">Mark all as complete</label>
         
         <!-- lista de ITEMS TODOS-->
