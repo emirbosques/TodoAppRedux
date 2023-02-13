@@ -1,4 +1,4 @@
-import { editTodo, toggleTodo } from './../todo.actions';
+import * as actions from './../todo.actions';
 import { AppState } from './../../app.reducer';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Todo } from '../models/todo.model';
@@ -51,13 +51,18 @@ export class TodoItemComponent implements OnInit {
   saveChanges() {
     this.editingTodo = false;
     if (this.textInput.valid && this.textInput.value !== this.todoItem.texto) {
-      this, this.store.dispatch(editTodo({ id: this.todoItem.id, texto: this.textInput.value }))
+      this, this.store.dispatch(actions.editTodo({ id: this.todoItem.id, texto: this.textInput.value }))
     }
 
   }
 
   setActionOnTodoCompleted() {
-    this.store.dispatch(toggleTodo({ id: this.todoItem.id }))
+    this.store.dispatch(actions.toggleTodo({ id: this.todoItem.id }))
+  }
+
+
+  deleteTodo(){
+    this.store.dispatch(actions.deleteTodo({id: this.todoItem.id}))
   }
 
 }
