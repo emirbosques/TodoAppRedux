@@ -8,7 +8,8 @@ export class Todo{
     constructor( texto: string ){
 
         this.texto = texto;
-        this.id  = new Date().getTime();
+        this.id  = new Date().getTime() + Math.floor(Math.random()*1000) ;
+        
         this.completado = false;
 
     }
