@@ -14,11 +14,16 @@ export const initialStateToDo: Todo[] = [
 
 const _toDoReducer = createReducer(
     initialStateToDo,
+    // CLEAN
+    on(actions.clearCompletedToDos, (state) =>
+        state.filter(todo => !todo.completado)
+    ),
+
     // CREATE
     on(actions.crearToDo, (state, { texto }) => [...state, new Todo(texto)]),
-    
+
     // DELETE
-    on(actions.deleteTodo, (state, { id }) => 
+    on(actions.deleteTodo, (state, { id }) =>
         state.filter(todo => todo.id !== id)
     ),
 

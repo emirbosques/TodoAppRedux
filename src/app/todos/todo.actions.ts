@@ -1,6 +1,9 @@
 import { createAction, props } from "@ngrx/store";
 
 
+export const clearCompletedToDos = createAction(
+    '[TODO] Clear All ToDos');
+
 export const crearToDo = createAction(
     '[TODO] Crear ToDo',
     props<{ texto: string }>()
